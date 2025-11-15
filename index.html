@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets BTS CIEL - E6</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* 1. THE SETUP */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* Fond gris très clair pour le corps */
+  background-color: #f3f4f6;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px 0;
+  place-items: center;
+}
+
+.slide-container {
+  align-items: center;
+  /* Fond de diapositive blanc */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 720px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px;
+  position: relative;
+  width: 1280px;
+}
+
+/* 1.1 BACKGROUND STYLING */
+
+/* Formes abstraites subtiles pour un look tech propre */
+.slide-container::before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 10% 90%, rgba(14, 165, 233, 0.05), transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.05), transparent 30%);
+}
+
+.slide-container>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* 2. CONSISTENT TYPOGRAPHY (Thème Clair) */
+
+/* Police des titres */
+.slide-container h1,
+.slide-container h2,
+.slide-container h3 {
+  /* Texte bleu foncé pour les titres */
+  color: #1e3a8a;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* Police du corps de texte */
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle,
+.slide-container .contact-info {
+  /* Texte gris foncé */
+  color: #374151;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Tailles de police cohérentes */
+
+.slide-container h1 {
+  font-size: 70px;
+  /* Titre principal en gris très foncé */
+  color: #1f2937;
+}
+
+.slide-container .slide-title {
+  /* h2 pour les titres de diapo */
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: left;
+  width: 100%;
+}
+
+.slide-container h3 {
+  font-size: 24px; /* Taille ajustée pour les tuiles */
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* Taille de texte unifiée */
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle {
+  font-size: 18px; /* Taille légèrement réduite pour les tuiles */
+  line-height: 1.5;
+}
+
+.slide-container .subtitle {
+  font-weight: 400;
+  margin: 20px auto;
+  max-width: 800px;
+  color: #4b5563;
+}
+
+.slide-container .content-area {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 3. LAYOUT DEFINITIONS (Thème Clair) */
+
+/* --- Layout: Title_Slide --- */
+.title-layout {
+  text-align: center;
+}
+.title-layout .details {
+  /* Accent bleu ciel */
+  color: #0ea5e9;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+/* Style pour le logo */
+.title-layout .logo {
+  max-width: 150px; /* Taille du logo */
+  height: auto;
+  margin-bottom: 20px; /* Espace sous le logo */
+}
+
+/* --- Layout: Tiled_Text_With_Icons --- */
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 30px; /* Espace réduit */
+  justify-content: center;
+  width: 100%;
+}
+
+/* Style pour le lien entourant la tuile */
+.tile-link {
+  color: inherit;
+  display: block;
+  flex: 1;
+  text-decoration: none;
+}
+
+.tile {
+  align-items: center;
+  /* Fond de tuile blanc cassé */
+  background-color: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Assure que la tuile remplit le <a> */
+  justify-content: flex-start;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Effet de survol sur le lien */
+.tile-link:hover .tile {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  /* Bordure accentuée au survol */
+  border-color: #0ea5e9;
+}
+
+.tile .icon {
+  /* Accent bleu ciel pour les icônes */
+  color: #0ea5e9;
+  font-size: 48px;
+  margin-bottom: 25px;
+}
+
+.tile h3 {
+  color: #1e3a8a; /* Titre de tuile bleu foncé */
+}
+
+.tile p {
+  color: #4b5563; /* Texte de tuile gris moyen */
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+/* Style pour le nombre d'élèves */
+.tile .team-size {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b5563;
+    margin-top: 10px;
+}
+
+/* Style pour les tuiles non cliquables */
+.tile.disabled {
+  background-color: #f3f4f6;
+  border-style: dashed;
+  border-color: #d1d5db;
+}
+
+.tile.disabled .icon {
+  color: #9ca3af;
+}
+
+.tile.disabled h3 {
+  color: #6b7280;
+}
+
+/* --- Layout: Q&A --- */
+.qa-layout {
+  text-align: center;
+  width: 100%;
+  align-self: center;
+}
+
+.qa-layout h2 {
+  color: #1f2937;
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.qa-layout p {
+  color: #374151;
+  font-size: 24px;
+}
+
+.qa-layout .contact-info {
+  display: none;
+}
+    </style>
+</head>
+<body>
+
+<!-- Diapositive 1: Title_Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <img src="https://herec.campus-metiers-occitanie.fr/wp-content/uploads/2023/06/logo-dhuodaA3-1024x1024.png" alt="Logo Lycée Dhuoda" class="logo">
+        <h1>Projets BTS CIEL</h1>
+        <p class="subtitle">Commission de Validation de Projet - Épreuve E6</p>
+        <p class="details">Lycée Dhuoda | 21 Novembre 2025</p>
+    </div>
+</div>
+
+<!-- Diapositive 2: Tiled_Text_With_Icons (Hub de navigation 1/2 - 3 Projets) -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">Navigation des Projets (1/2)</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            
+            <!-- Tuile 1: Séquenceur RMN -->
+            <a href="https://docs.google.com/presentation/d/13TucFa3lhMPVeOZ5G7Ld8Y4os00aBaenLzIJSlAgw2U/edit?usp=sharing" target="_blank" class="tile-link">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-wave-square"></i></div>
+                    <h3>Séquenceur RMN</h3>
+                    <p>Cliquez pour lancer la présentation.</p>
+                    <div class="team-size"><i class="fa-solid fa-users"></i> 3 Élèves</div>
+                </div>
+            </a>
+            
+            <!-- Tuile 2: Suivi de trajet professionnel -->
+            <a href="https://docs.google.com/presentation/d/1bpM9-1OGzrSp7TvNFOAHqmCMkCmr80x1GSE_kpRwi8Y/edit?usp=sharing" target="_blank" class="tile-link">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-route"></i></div>
+                    <h3>Suivi de trajet professionnel</h3>
+                    <p>Cliquez pour lancer la présentation.</p>
+                    <div class="team-size"><i class="fa-solid fa-users"></i> 4 Élèves</div>
+                </div>
+            </a>
+            
+            <!-- Tuile 3: Eco-Classe -->
+            <a href="https://docs.google.com/presentation/d/10PZFrNKEev7vPqlgcq18TkN8iAztGY9w1Wq9D6_A0mw/edit?usp=sharing" target="_blank" class="tile-link">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>Eco-Classe</h3>
+                    <p>Cliquez pour lancer la présentation.</p>
+                    <div class="team-size"><i class="fa-solid fa-users"></i> 4 Élèves</div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Diapositive 3: Tiled_Text_With_Icons (Hub de navigation 2/2 - 2 Projets) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Navigation des Projets (2/2)</h2>
+    <div class="content-area">
+        <div class="tiled-content" style="max-width: 800px; margin: 0 auto;">
+            
+            <!-- Tuile 4: SGL - CHU (Cliquez pour lancer la présentation) -->
+            <a href="https://docs.google.com/presentation/d/1EMCIlXl2Z009vPMN7Oq2MbbqUSUkVeH7RgsHmKeGryU/edit?usp=sharing" target="_blank" class="tile-link">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-hospital-user"></i></div>
+                    <h3>SGL - CHU</h3>
+                    <p>Cliquez pour lancer la présentation.</p>
+                    <div class="team-size"><i class="fa-solid fa-users"></i> 4 Élèves</div>
+                </div>
+            </a>
+            
+            <!-- Tuile 5 (Build Perrier - CLiquable) -->
+            <!-- ATTENTION: Remplacez le href="#" ci-dessous par votre vrai lien de présentation -->
+            <a href="#" target="_blank" class="tile-link">
+                <div class="tile">
+                    <!-- Icône changée pour refléter un projet "fini" -->
+                    <div class="icon"><i class="fa-solid fa-cogs"></i></div>
+                    <h3>Build Perrier</h3>
+                    <!-- Texte mis à jour -->
+                    <p>Cliquez pour lancer la présentation.</p>
+                    <div class="team-size"><i class="fa-solid fa-users"></i> 4 Élèves</div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Diapositive 4: Q&A -->
+<div class="slide-container" id="slide4">
+    <div class="qa-layout">
+        <h2>Questions?</h2>
+        <p>Merci de votre attention.</p>
+    </div>
+</div>
+
+</body>
+</html>
